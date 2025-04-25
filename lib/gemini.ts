@@ -1,6 +1,4 @@
-// Gemini API client utility
 
-// Function to generate a response from Gemini API
 export async function generateGeminiResponse(prompt: string): Promise<string> {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
@@ -12,17 +10,25 @@ export async function generateGeminiResponse(prompt: string): Promise<string> {
     // Gemini API endpoint
     const endpoint = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent";
 
-    // Prepare the request body
+]
     const requestBody = {
       contents: [
         {
+          role: "user",
           parts: [
             {
-              text: prompt
+              text: "You are a mental health support chatbot and your name is Mindcare. Keep your responses brief, concise, and to the point. Aim for 1-3 short sentences when possible. Be empathetic but direct. Now respond to this user message: " + prompt
             }
           ]
         }
-      ]
+      ],
+      // Add generation config to encourage shorter responses
+      generationConfig: {
+        maxOutputTokens: 150,
+        temperature: 0.4,
+        topP: 0.8,
+        topK: 40
+      }
     };
 
     // Make the API request
