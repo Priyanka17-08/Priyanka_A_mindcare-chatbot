@@ -24,7 +24,7 @@ export async function generateGeminiResponse(prompt: string): Promise<string> {
       ],
       // Add generation config to encourage shorter responses
       generationConfig: {
-        maxOutputTokens: 250,
+        maxOutputTokens: 200,
         temperature: 0.4,
         topP: 0.8,
         topK: 40
